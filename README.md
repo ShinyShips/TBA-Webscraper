@@ -1,4 +1,4 @@
-# Blue Alliance Web Scraper to Google Sheets
+# The Blue Alliance Web Scraper to Google Sheets
 This Python script scrapes the Blue Alliance website for information about a robotics competition and writes the data to a Google Sheet. It uses the `pandas`, `gspread`, `gspread_dataframe`, `os`, `pydrive`, `python-dotenv`, `bs4,` and `selenium` packages to accomplish this.
 
 ## Prerequisites
