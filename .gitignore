@@ -1,0 +1,17 @@
+# Environment file
+.env
+
+.git
+GC-Credentials.json
+parseddata.txt
+
+# PyDrive cache directory
+.cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.pyc
+*.pyo
+*~
+__pycache__/
