@@ -1,10 +1,10 @@
 # Blue Alliance Web Scraper to Google Sheets
-This Python script scrapes the Blue Alliance website for information about a robotics competition and writes the data to a Google Sheet. It uses the `pandas`, `gspread`, `gspread_dataframe`, `os`, `pydrive`, `python-dotenv`, `bs4,` and `selenium` packages to accomplish this.
+This Python script scrapes the Blue Alliance website for information about a robotics competition, accesses data from the statbotics API and writes the data to a Google Sheet. It uses the `pandas`, `gspread`, `gspread_dataframe`, `os`, `pydrive`, `python-dotenv`, `bs4`, `statbotics`, and `selenium` packages to accomplish this.
 
 ## Prerequisites
 To use this script, you'll need the following:
  - A Google account with access to Google Sheets
- - A The Blue Alliance event in which you are trying to analyze (specifically a link to the insights page of the event)
+ - The event ID from TheBlueAlliance.com or Statbotics.io in which you are trying to analyze i.e. 2023paben
  - A local installation of Chrome, and the ChromeDriver executable file that matches your Chrome version
 
 ## Setup
@@ -28,7 +28,9 @@ To use this script, you'll need the following:
 
 		WEBDRIVER_PATH=<path_to_chromedriver_executable>
 
-		TBA_INSIGHTS_LINK=<url_of_blue_alliance_website>
+		EVENT_ID=<id_of_event>
+
+		for example, the ID of the 2023 FMA District Bensalem event can be found at the end of this url after /event/ https://www.thebluealliance.com/event/2023paben . This is the same id used on Statbotics
 
 5. Run the script:
 
@@ -36,14 +38,16 @@ To use this script, you'll need the following:
 
 ## How it works
 
-The script uses the selenium package to open a Chrome window and navigate to the Blue Alliance website for a specific competition. It then uses BeautifulSoup to scrape the page for information about the teams and their scores.
+The script uses the selenium package to open a Chrome window and navigate to the Blue Alliance website for a specific competition. It then uses BeautifulSoup to scrape the page for information about the team's OPR, number of cones, and number of cubes. It then calls the statbotics API for each team at the event and gathers the overall EPA, auto EPA, teleop EPA, and endgame EPA.
 
 The script writes the scraped data to a Pandas dataframe, which is then written to a Google Sheet using the gspread package. You can then take data from the Google Sheet and then do your own analysis.
 
-## Future Work/Expansion
-This can be be improved or expanded upon in a bunch of ways. Need more data than just cubes and cones? Add a bit more selenium code to capture those metrics and then create additional dictionaries for the data and then append it to the rows dictionary.
+Currently, this is being used to gather information to be dumped into a database for use within an internal scouting app.
 
-Future work may include finding all relevant data for a team across multiple events or just the alst event they attended. As this cannot really be used in the early stages of an event before all the teams have played.
+## Future Work/Expansion
+This can be be improved or expanded upon in a bunch of ways. Need more data than what was provided? Add a bit more selenium code to capture those metrics and then create additional dictionaries for the data and then append it to the rows dictionary.
+
+Future work may include finding all relevant data for a team across multiple events or just the all events they attended. As this cannot really be used in the early stages of an event before all the teams have played. Also possibly scraping the EPA breakdown from statbotics or just waiting until that is added to the API to add that info.
 
 ## Contributing
 
